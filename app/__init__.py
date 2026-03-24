@@ -32,8 +32,10 @@ def create_app(config_class=None):
     # Register route blueprints
     from app.routes.entries import entries_bp
     from app.routes.reports import reports_bp
+    from app.routes.categories import categories_bp
     app.register_blueprint(entries_bp)
     app.register_blueprint(reports_bp)
+    app.register_blueprint(categories_bp)
 
     # Create database tables if they don't exist yet
     with app.app_context():

@@ -25,6 +25,7 @@ PAGES = {
     "add_entry": "/entries/add",
     "pnl_report": "/reports/pnl",
     "balance_sheet": "/reports/balance",
+    "categories": "/categories",
 }
 
 BASE_URL = "http://localhost:5000"

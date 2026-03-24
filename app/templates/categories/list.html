@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Categories — SimpleBooks{% endblock %}
+
+{% block content %}
+<hgroup>
+    <h1>Categories</h1>
+    <p>Manage how you tag your income and expenses.</p>
+</hgroup>
+
+<p>
+    <a href="{{ url_for('categories.add_category') }}" role="button">Add Category</a>
+</p>
+
+<div class="grid">
+    <!-- Income categories -->
+    <div>
+        <h2 class="amount-credit">Income</h2>
+        {% if income_cats %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Source</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in income_cats %}
+                <tr>
+                    <td>{{ cat.name }}</td>
+                    <td><small>{{ cat.group }}</small></td>
+                    <td>
+                        <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
+                        <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}" style="display:inline">
+                            <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No income categories yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Expense categories -->
+    <div>
+        <h2 class="amount-debit">Expenses</h2>
+        {% if expense_cats %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Source</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in expense_cats %}
+                <tr>
+                    <td>{{ cat.name }}</td>
+                    <td><small>{{ cat.group }}</small></td>
+                    <td>
+                        <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
+                        <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}" style="display:inline">
+                            <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No expense categories yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

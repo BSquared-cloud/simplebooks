@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if category else "Add" }} Category — SimpleBooks{% endblock %}
+
+{% block content %}
+<h1>{{ "Edit" if category else "Add" }} Category</h1>
+
+<form method="post">
+    <label>
+        Name
+        <input type="text" name="name" value="{{ category.name if category else '' }}"
+               placeholder="e.g., Vehicle Maintenance" maxlength="100" required>
+    </label>
+
+    <fieldset>
+        <legend>Type</legend>
+        <div class="radio-inline">
+            <label>
+                <input type="radio" name="type" value="income"
+                       {{ "checked" if not category or category.type == "income" }}>
+                Income (money in)
+            </label>
+            <label>
+                <input type="radio" name="type" value="expense"
+                       {{ "checked" if category and category.type == "expense" }}>
+                Expense (money out)
+            </label>
+        </div>
+    </fieldset>
+
+    <button type="submit">{{ "Update" if category else "Add" }} Category</button>
+    <a href="{{ url_for('categories.list_categories') }}" role="button" class="secondary outline">Cancel</a>
+</form>
+{% endblock %}
