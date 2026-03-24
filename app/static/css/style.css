@@ -1,0 +1,41 @@
+/*
+ * SimpleBooks custom styles.
+ * These override/extend Pico CSS defaults — keep it minimal.
+ */
+
+/* Green for income/credits, red for expenses/debits */
+.amount-credit {
+    color: #2e7d32;
+}
+
+.amount-debit {
+    color: #c62828;
+}
+
+/* Flash message styling */
+.flash-success {
+    background-color: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flash-error {
+    background-color: #ffebee;
+    border-left: 4px solid #c62828;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flash-info {
+    background-color: #e3f2fd;
+    border-left: 4px solid #1565c0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Smaller action buttons in the table */
+.small-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+}

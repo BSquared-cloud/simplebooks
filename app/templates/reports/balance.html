@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Balance Sheet — SimpleBooks{% endblock %}
+
+{% block content %}
+<hgroup>
+    <h1>Balance Sheet</h1>
+    <p>{{ start.strftime("%b %d, %Y") }} — {{ end.strftime("%b %d, %Y") }}</p>
+</hgroup>
+
+<!-- Date range picker -->
+<form method="get" class="grid">
+    <label>
+        Start date
+        <input type="date" name="start_date" value="{{ start.isoformat() }}">
+    </label>
+    <label>
+        End date
+        <input type="date" name="end_date" value="{{ end.isoformat() }}">
+    </label>
+    <label>
+        &nbsp;
+        <button type="submit">Update</button>
+    </label>
+</form>
+
+{% if rows %}
+<figure>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Credit</th>
+                <th>Debit</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.date.strftime("%Y-%m-%d") }}</td>
+                <td>{{ row.description }}</td>
+                <td class="amount-credit">{{ "$%.2f"|format(row.credit / 100) if row.credit else "" }}</td>
+                <td class="amount-debit">{{ "$%.2f"|format(row.debit / 100) if row.debit else "" }}</td>
+                <td class="{{ 'amount-credit' if row.balance >= 0 else 'amount-debit' }}">
+                    ${{ "%.2f"|format(row.balance / 100) }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"><strong>Final Balance</strong></td>
+                <td class="{{ 'amount-credit' if final_balance >= 0 else 'amount-debit' }}">
+                    <strong>${{ "%.2f"|format(final_balance / 100) }}</strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</figure>
+{% else %}
+<article>
+    <p>No entries in this period.</p>
+</article>
+{% endif %}
+
+<p>
+    <a href="{{ url_for('reports.export_csv', start_date=start.isoformat(), end_date=end.isoformat()) }}"
+       role="button" class="outline">Export CSV</a>
+</p>
+{% endblock %}

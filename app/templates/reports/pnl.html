@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Profit & Loss — SimpleBooks{% endblock %}
+
+{% block content %}
+<hgroup>
+    <h1>Profit & Loss</h1>
+    <p>{{ start.strftime("%b %d, %Y") }} — {{ end.strftime("%b %d, %Y") }}</p>
+</hgroup>
+
+<!-- Date range picker -->
+<form method="get" class="grid">
+    <label>
+        Start date
+        <input type="date" name="start_date" value="{{ start.isoformat() }}">
+    </label>
+    <label>
+        End date
+        <input type="date" name="end_date" value="{{ end.isoformat() }}">
+    </label>
+    <label>
+        &nbsp;
+        <button type="submit">Update</button>
+    </label>
+</form>
+
+<!-- Income section -->
+<h2>Income</h2>
+{% if income_by_category %}
+<table>
+    <tbody>
+        {% for name, cents in income_by_category.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td class="amount-credit">${{ "%.2f"|format(cents / 100) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><strong>Total Income</strong></td>
+            <td class="amount-credit"><strong>${{ "%.2f"|format(total_income / 100) }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+{% else %}
+<p>No income recorded in this period.</p>
+{% endif %}
+
+<!-- Expenses section -->
+<h2>Expenses</h2>
+{% if expense_by_category %}
+<table>
+    <tbody>
+        {% for name, cents in expense_by_category.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td class="amount-debit">${{ "%.2f"|format(cents / 100) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><strong>Total Expenses</strong></td>
+            <td class="amount-debit"><strong>${{ "%.2f"|format(total_expenses / 100) }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+{% else %}
+<p>No expenses recorded in this period.</p>
+{% endif %}
+
+<!-- Net profit -->
+<article>
+    <header><strong>Net Profit / Loss</strong></header>
+    <strong class="{{ 'amount-credit' if net_profit >= 0 else 'amount-debit' }}" style="font-size: 1.5em;">
+        ${{ "%.2f"|format(net_profit / 100) }}
+    </strong>
+</article>
+
+<p>
+    <a href="{{ url_for('reports.export_csv', start_date=start.isoformat(), end_date=end.isoformat()) }}"
+       role="button" class="outline">Export CSV</a>
+</p>
+{% endblock %}
