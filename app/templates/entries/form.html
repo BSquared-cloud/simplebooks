@@ -26,16 +26,18 @@
 
         <fieldset>
             <legend>Type</legend>
-            <label>
-                <input type="radio" name="entry_type" value="credit"
-                       {{ "checked" if not entry or entry.entry_type == "credit" }}>
-                Credit (money in)
-            </label>
-            <label>
-                <input type="radio" name="entry_type" value="debit"
-                       {{ "checked" if entry and entry.entry_type == "debit" }}>
-                Debit (money out)
-            </label>
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" name="entry_type" value="credit"
+                           {{ "checked" if not entry or entry.entry_type == "credit" }}>
+                    Credit (money in)
+                </label>
+                <label>
+                    <input type="radio" name="entry_type" value="debit"
+                           {{ "checked" if entry and entry.entry_type == "debit" }}>
+                    Debit (money out)
+                </label>
+            </div>
         </fieldset>
     </div>
 

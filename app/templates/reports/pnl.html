@@ -70,11 +70,11 @@
 {% endif %}
 
 <!-- Net profit -->
-<article>
+<article class="net-profit-card">
     <header><strong>Net Profit / Loss</strong></header>
-    <strong class="{{ 'amount-credit' if net_profit >= 0 else 'amount-debit' }}" style="font-size: 1.5em;">
+    <span class="summary-amount {{ 'amount-credit' if net_profit >= 0 else 'amount-debit' }}">
         ${{ "%.2f"|format(net_profit / 100) }}
-    </strong>
+    </span>
 </article>
 
 <p>

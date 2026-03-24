@@ -8,26 +8,25 @@
 </hgroup>
 
 <!-- Summary cards -->
-<div class="grid">
+<div class="grid summary-cards">
     <article>
         <header>Income</header>
-        <strong class="amount-credit">${{ "%.2f"|format(total_credits / 100) }}</strong>
+        <span class="summary-amount amount-credit">${{ "%.2f"|format(total_credits / 100) }}</span>
     </article>
     <article>
         <header>Expenses</header>
-        <strong class="amount-debit">${{ "%.2f"|format(total_debits / 100) }}</strong>
+        <span class="summary-amount amount-debit">${{ "%.2f"|format(total_debits / 100) }}</span>
     </article>
     <article>
         <header>Balance</header>
-        <strong class="{{ 'amount-credit' if balance_cents >= 0 else 'amount-debit' }}">
+        <span class="summary-amount {{ 'amount-credit' if balance_cents >= 0 else 'amount-debit' }}">
             ${{ "%.2f"|format(balance_cents / 100) }}
-        </strong>
+        </span>
     </article>
 </div>
 
-<!-- Filters -->
-<details>
-    <summary>Filter entries</summary>
+<!-- Filters — always visible since date filtering is the primary tax-time workflow -->
+<div class="filter-bar">
     <form method="get" action="{{ url_for('entries.index') }}">
         <div class="grid">
             <label>
@@ -52,12 +51,12 @@
         </div>
         <button type="submit">Apply</button>
     </form>
-</details>
+</div>
 
 <!-- Entry table -->
 {% if entries %}
 <figure>
-    <table role="grid">
+    <table role="grid" class="ledger-table">
         <thead>
             <tr>
                 <th>Date</th>

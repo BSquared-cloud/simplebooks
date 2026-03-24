@@ -39,3 +39,76 @@
     padding: 0.25rem 0.5rem;
     font-size: 0.85rem;
 }
+
+/* Summary cards on dashboard — make the numbers the hero */
+.summary-cards article {
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.summary-cards article header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.summary-cards .summary-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+/* Filter bar — visible by default, compact layout */
+.filter-bar {
+    background: var(--pico-card-background-color);
+    border: 1px solid var(--pico-muted-border-color);
+    border-radius: var(--pico-border-radius);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-bar form {
+    margin-bottom: 0;
+}
+
+.filter-bar button {
+    margin-bottom: 0;
+}
+
+/* Radio buttons side by side */
+.radio-inline {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.radio-inline label {
+    margin-bottom: 0;
+}
+
+/* Net profit highlight card */
+.net-profit-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.net-profit-card .summary-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Right-align amounts in tables */
+td:last-child, th:last-child {
+    text-align: right;
+}
+
+/* But not the actions column on the ledger */
+.ledger-table td:last-child,
+.ledger-table th:last-child {
+    text-align: center;
+}
