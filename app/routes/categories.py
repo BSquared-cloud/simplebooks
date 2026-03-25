@@ -32,7 +32,7 @@ def add_category():
 @categories_bp.route("/<int:category_id>/edit", methods=["GET", "POST"])
 def edit_category(category_id):
     """Edit an existing category."""
-    category = Category.query.get_or_404(category_id)
+    category = db.get_or_404(Category, category_id)
     if request.method == "POST":
         return _save_category(category=category)
     return render_template("categories/form.html", category=category)
@@ -44,7 +44,7 @@ def delete_category(category_id):
     Delete a category. Only allowed if no entries use it.
     This prevents orphaned entries with no category.
     """
-    category = Category.query.get_or_404(category_id)
+    category = db.get_or_404(Category, category_id)
 
     # Check if any entries reference this category
     entry_count = Entry.query.filter_by(category_id=category.id).count()

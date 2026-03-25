@@ -15,7 +15,7 @@ def test_index_empty(client):
 def test_index_shows_entry(client, sample_entry, app):
     """Ledger page shows an existing entry."""
     with app.app_context():
-        entry = Entry.query.get(sample_entry)
+        entry = db.session.get(Entry, sample_entry)
         response = client.get("/")
         assert response.status_code == 200
         assert entry.description.encode() in response.data
@@ -110,7 +110,7 @@ def test_edit_entry_success(client, sample_entry, sample_category, app):
         "category_id": sample_category,
     }, follow_redirects=True)
     with app.app_context():
-        entry = Entry.query.get(sample_entry)
+        entry = db.session.get(Entry, sample_entry)
         assert entry.description == "Updated description"
         assert entry.amount_cents == 7500
 
@@ -119,7 +119,7 @@ def test_delete_entry(client, sample_entry, app):
     """POST to delete removes the entry."""
     client.post(f"/entries/{sample_entry}/delete", follow_redirects=True)
     with app.app_context():
-        assert Entry.query.get(sample_entry) is None
+        assert db.session.get(Entry, sample_entry) is None
 
 
 def test_delete_entry_404(client):

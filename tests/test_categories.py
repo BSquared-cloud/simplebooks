@@ -48,7 +48,7 @@ def test_edit_category_success(client, sample_category, app):
         "type": "income",
     }, follow_redirects=True)
     with app.app_context():
-        cat = Category.query.get(sample_category)
+        cat = db.session.get(Category, sample_category)
         assert cat.name == "Renamed Category"
 
 
@@ -56,7 +56,7 @@ def test_delete_category_success(client, sample_category, app):
     """Deleting a category with no entries removes it."""
     client.post(f"/categories/{sample_category}/delete", follow_redirects=True)
     with app.app_context():
-        assert Category.query.get(sample_category) is None
+        assert db.session.get(Category, sample_category) is None
 
 
 def test_delete_category_with_entries_blocked(client, sample_entry, sample_category, app):
@@ -64,7 +64,7 @@ def test_delete_category_with_entries_blocked(client, sample_entry, sample_categ
     response = client.post(f"/categories/{sample_category}/delete", follow_redirects=True)
     # Should show an error and the category should still exist
     with app.app_context():
-        assert Category.query.get(sample_category) is not None
+        assert db.session.get(Category, sample_category) is not None
     assert b"can" in response.data.lower()  # flash says "Can't delete..."
 
 

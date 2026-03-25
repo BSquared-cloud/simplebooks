@@ -4,7 +4,7 @@ Database models for SimpleBooks.
 All monetary values are stored as integers (cents) to avoid
 floating-point rounding errors. For example, $42.50 is stored as 4250.
 """
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from app import db
 
 
@@ -45,7 +45,7 @@ class Entry(db.Model):
     amount_cents = db.Column(db.Integer, nullable=False)  # stored in cents
     entry_type = db.Column(db.String(6), nullable=False)  # "credit" or "debit"
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     @property
     def amount_dollars(self):

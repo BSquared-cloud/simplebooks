@@ -77,7 +77,7 @@ def add_entry():
 @entries_bp.route("/entries/<int:entry_id>/edit", methods=["GET", "POST"])
 def edit_entry(entry_id):
     """Show the edit form (GET) or update an existing entry (POST)."""
-    entry = Entry.query.get_or_404(entry_id)
+    entry = db.get_or_404(Entry, entry_id)
 
     if request.method == "POST":
         return _save_entry(entry=entry)
@@ -89,7 +89,7 @@ def edit_entry(entry_id):
 @entries_bp.route("/entries/<int:entry_id>/delete", methods=["POST"])
 def delete_entry(entry_id):
     """Delete an entry. POST-only to prevent accidental deletion via GET."""
-    entry = Entry.query.get_or_404(entry_id)
+    entry = db.get_or_404(Entry, entry_id)
     db.session.delete(entry)
     db.session.commit()
     flash("Entry deleted.", "info")
@@ -141,7 +141,7 @@ def _save_entry(entry):
         errors.append("Entry type must be credit or debit.")
 
     # Category
-    if not category_id or not Category.query.get(category_id):
+    if not category_id or not db.session.get(Category, category_id):
         errors.append("Please select a valid category.")
 
     # If there are errors, re-show the form with messages

@@ -1,0 +1,4 @@
+# Dev-only dependencies — not required to run the app
+# Install with: pip install -r requirements-dev.txt
+
+playwright  # UI screenshot tooling (screenshots.py)

@@ -52,6 +52,16 @@ On first launch, 9 default categories are created covering the most common self-
 - **Database:** SQLite (zero configuration, single file)
 - **Frontend:** Server-rendered templates with Pico CSS
 
+## Development Tools
+
+Screenshot tooling uses Playwright to capture UI state for autonomous review. It's optional and not needed to run the app.
+
+```bash
+pip install -r requirements-dev.txt
+playwright install chromium
+python screenshots.py
+```
+
 ## Project Structure
 
 ```
