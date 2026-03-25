@@ -58,6 +58,9 @@ htmlcov/
 .pytest_cache/
 .mypy_cache/
 
+# Claude Code
+CLAUDE.md
+
 # SimpleBooks specific
 instance/
 screenshots/
