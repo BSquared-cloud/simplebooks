@@ -24,16 +24,16 @@ A minimal ledger app for gig workers, freelancers, and small property owners.
 Two versions planned: open-source self-hosted (Phase 1) and hosted SaaS (Phase 2).
 Licensed under AGPL-3.0.
 
-## Current Status: Phase 1 MVP — Feature Complete
+## Current Status: Phase 1 — Complete
 - Ledger CRUD with date/category filtering
-- 27 pre-configured categories (rideshare, freelance, property) + custom category management
+- 9 universal default categories (cross-gig: rental, client income, fuel, mileage, etc.) + custom category management
 - P&L and balance sheet reports with date ranges
 - CSV export
-- Polished UI with Pico CSS
+- Polished UI with Pico CSS, dark mode toggle (system preference + localStorage)
+- 33 pytest tests in `tests/` — see `tests/TESTS.md` for overview
 - Playwright screenshot tool (`python screenshots.py`) for autonomous UI review
 - README, license, .env.example all in place
-
-**Not yet done:** push to GitHub, tests, dark mode, first-time template picker
+- Live on GitHub: https://github.com/BSquared-cloud/simplebooks
 
 ## Tech Stack
 - **Backend**: Python 3.13, Flask, SQLAlchemy, SQLite
