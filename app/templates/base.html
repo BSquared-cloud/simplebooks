@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SimpleBooks{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📒</text></svg>">
+
+    <!-- Apply saved theme before CSS loads to prevent a flash of wrong theme -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('sb-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+      })();
+    </script>
 
     <!-- Pico CSS — classless framework that makes plain HTML look clean -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
@@ -22,6 +30,7 @@
                 <li><a href="{{ url_for('reports.profit_and_loss') }}">P&L</a></li>
                 <li><a href="{{ url_for('reports.balance_sheet') }}">Balance</a></li>
                 <li><a href="{{ url_for('categories.list_categories') }}">Categories</a></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"></button></li>
             </ul>
         </nav>
     </header>
@@ -44,5 +53,30 @@
     <footer class="container">
         <small>SimpleBooks — simple ledger for simple people. Open source under AGPL-3.0.</small>
     </footer>
+
+    <script>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+
+        function getEffectiveTheme() {
+          var explicit = document.documentElement.getAttribute('data-theme');
+          if (explicit === 'dark' || explicit === 'light') return explicit;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function updateIcon() {
+          btn.textContent = getEffectiveTheme() === 'dark' ? '☀' : '☾';
+        }
+
+        btn.addEventListener('click', function () {
+          var next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('sb-theme', next);
+          updateIcon();
+        });
+
+        updateIcon();
+      })();
+    </script>
 </body>
 </html>
