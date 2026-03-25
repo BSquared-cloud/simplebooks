@@ -14,11 +14,13 @@ Track your income and expenses, categorize transactions, and generate reports yo
 ## Features
 
 - Add credits and debits as ledger entries
-- Pre-configured category templates for rideshare, freelance, and property management
+- 9 default categories covering common self-employment income and expenses
+- Custom category management — add, edit, or delete any category
 - Filter entries by date range and category
 - Profit & Loss report by category
 - Balance sheet with running totals
 - One-click CSV export for your accountant or tax software
+- Dark mode (follows system preference, toggleable)
 - Runs locally — your financial data stays on your machine
 
 ## Quick Start
@@ -27,8 +29,8 @@ Track your income and expenses, categorize transactions, and generate reports yo
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/SimpleBooks.git
-cd SimpleBooks
+git clone https://github.com/BSquared-cloud/simplebooks.git
+cd simplebooks
 
 # Set up environment
 cp .env.example .env
@@ -42,17 +44,7 @@ python run.py
 
 Open http://localhost:5000 in your browser.
 
-On first launch, default categories for rideshare, freelance, and property management are automatically created. You can add your own categories as needed.
-
-## Category Templates
-
-SimpleBooks ships with pre-configured categories so you don't have to set everything up from scratch:
-
-| Template | Example Categories |
-|----------|-------------------|
-| Rideshare/Delivery | Ride Income, Tips, Fuel, Mileage, Platform Fees, Tolls |
-| Freelance | Client Income, Software & Tools, Home Office, Marketing |
-| Property Management | Rent Income, Repairs, Insurance, Property Tax, Utilities |
+On first launch, 9 default categories are created covering the most common self-employment income and expenses. Add, edit, or delete categories to fit your situation.
 
 ## Tech Stack
 
@@ -71,11 +63,12 @@ SimpleBooks/
 │   ├── models.py       # Entry and Category models
 │   ├── seed.py         # Default category templates
 │   ├── routes/
-│   │   ├── entries.py  # Ledger CRUD
-│   │   └── reports.py  # P&L, balance sheet, CSV export
+│   │   ├── entries.py    # Ledger CRUD
+│   │   ├── reports.py    # P&L, balance sheet, CSV export
+│   │   └── categories.py # Category management
 │   ├── templates/      # Jinja2 HTML templates
 │   └── static/css/     # Minimal custom styles
-└── tests/
+└── tests/              # pytest suite (33 tests)
 ```
 
 ## Contributing
