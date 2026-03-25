@@ -16,7 +16,7 @@
     <div>
         <h2 class="amount-credit">Income</h2>
         {% if income_cats %}
-        <table>
+        <table class="categories-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -30,10 +30,12 @@
                     <td>{{ cat.name }}</td>
                     <td><small>{{ cat.group }}</small></td>
                     <td>
-                        <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
-                        <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}" style="display:inline">
-                            <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
-                        </form>
+                        <div class="action-btns">
+                            <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
+                            <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}">
+                                <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
@@ -48,7 +50,7 @@
     <div>
         <h2 class="amount-debit">Expenses</h2>
         {% if expense_cats %}
-        <table>
+        <table class="categories-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -62,10 +64,12 @@
                     <td>{{ cat.name }}</td>
                     <td><small>{{ cat.group }}</small></td>
                     <td>
-                        <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
-                        <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}" style="display:inline">
-                            <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
-                        </form>
+                        <div class="action-btns">
+                            <a href="{{ url_for('categories.edit_category', category_id=cat.id) }}" class="small-btn outline" role="button">Edit</a>
+                            <form method="post" action="{{ url_for('categories.delete_category', category_id=cat.id) }}">
+                                <button type="submit" class="small-btn outline secondary" onclick="return confirm('Delete this category?')">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

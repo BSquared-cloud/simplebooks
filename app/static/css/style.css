@@ -107,8 +107,30 @@ td:last-child, th:last-child {
     text-align: right;
 }
 
-/* But not the actions column on the ledger */
+/* But not the actions column on the ledger or categories tables */
 .ledger-table td:last-child,
-.ledger-table th:last-child {
+.ledger-table th:last-child,
+.categories-table td:last-child,
+.categories-table th:last-child {
     text-align: center;
+}
+
+/* Keep Edit/Delete buttons on one line */
+.action-btns {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btns form {
+    margin: 0;
+}
+
+/* Pico v2 ignores outline class on <a role="button"> — force it manually */
+.action-btns a[role="button"] {
+    background-color: transparent;
+    color: var(--pico-primary);
+    border: var(--pico-border-width) solid var(--pico-primary);
+    box-shadow: none;
 }

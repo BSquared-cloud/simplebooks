@@ -76,10 +76,12 @@
                     {{ "+" if entry.entry_type == "credit" else "-" }}${{ "%.2f"|format(entry.amount_dollars) }}
                 </td>
                 <td>
-                    <a href="{{ url_for('entries.edit_entry', entry_id=entry.id) }}" role="button" class="outline small-btn">Edit</a>
-                    <form method="post" action="{{ url_for('entries.delete_entry', entry_id=entry.id) }}" style="display:inline">
-                        <button type="submit" class="outline secondary small-btn" onclick="return confirm('Delete this entry?')">Delete</button>
-                    </form>
+                    <div class="action-btns">
+                        <a href="{{ url_for('entries.edit_entry', entry_id=entry.id) }}" role="button" class="outline small-btn">Edit</a>
+                        <form method="post" action="{{ url_for('entries.delete_entry', entry_id=entry.id) }}">
+                            <button type="submit" class="outline secondary small-btn" onclick="return confirm('Delete this entry?')">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
