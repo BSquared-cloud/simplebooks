@@ -60,6 +60,7 @@ htmlcov/
 
 # Claude Code
 CLAUDE.md
+.claudeignore
 
 # SimpleBooks specific
 instance/
